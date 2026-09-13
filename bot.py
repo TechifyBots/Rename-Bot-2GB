@@ -34,35 +34,41 @@ class Bot(Client):
             sleep_threshold=15,
         )
 
-    async def start(self):
-        await super().start()
+    async def start(self, *args, **kwargs):
+        await super().start(*args, **kwargs)
         me = await self.get_me()
         self.mention = me.mention
-        self.username = me.username  
-        self.uptime = Config.BOT_UPTIME     
+        self.username = me.username
+        self.uptime = Config.BOT_UPTIME
         if Config.WEBHOOK:
             app = web.AppRunner(await web_server())
             await app.setup()
-            PORT = int(os.environ.get("PORT", 8000))  # Use port 8000 or env PORT
+            PORT = int(os.environ.get("PORT", 8000))
             await web.TCPSite(app, "0.0.0.0", PORT).start()
         print(f"{me.first_name} Is Started.....✨️")
         if Config.ADMIN:
-            try: 
-                await self.send_message(Config.ADMIN, f"**{me.first_name} Is Started...**")                                
+            try:
+                await self.send_message(Config.ADMIN, f"**{me.first_name} Is Started...**")
             except Exception as e:
                 print(f"Error sending message to admin: {e}")
-        
         if Config.LOG_CHANNEL:
             try:
                 curr = datetime.now(timezone("Asia/Kolkata"))
-                date = curr.strftime('%d %B, %Y')
-                time = curr.strftime('%I:%M:%S %p')
-                await self.send_message(Config.LOG_CHANNEL, f"**{me.mention} Is Restarted !!**\n\n📅 Date : `{date}`\n⏰ Time : `{time}`\n🌐 Timezone : `Asia/Kolkata`\n\n🉐 Version : `v{__version__} (Layer {layer})`</b>")                                
+                date = curr.strftime("%d %B, %Y")
+                time = curr.strftime("%I:%M:%S %p")
+                msg = (
+                    f"**{me.mention} Is Restarted !!**\n\n"
+                    f"📅 Date : `{date}`\n"
+                    f"⏰ Time : `{time}`\n"
+                    f"🌐 Timezone : `Asia/Kolkata`\n\n"
+                    f"🉐 Version : `v{__version__} (Layer {layer})`"
+                )
+                await self.send_message(Config.LOG_CHANNEL, msg)
             except Exception as e:
                 print(f"Error sending message to LOG_CHANNEL: {e}")
 
-    async def stop(self):
-        await super().stop()
+    async def stop(self, *args, **kwargs):
+        await super().stop(*args, **kwargs)
         print(f"{self.mention} is stopped.")
 
 Bot().run()
