@@ -1,11 +1,8 @@
 pyrofork==2.3.69
 tgcrypto
 motor
-dnspython
 hachoir
 pillow
 aiohttp
 pytz
-flask
-gunicorn
 pyromod
