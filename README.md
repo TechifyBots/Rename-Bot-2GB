@@ -108,6 +108,7 @@ Watch this short video to understand **what the bot is**, **why it's useful**, *
 | `AUTH_CHANNELS` | Force Subscribe Channels |
 | `AUTH_REQ_CHANNELS` | Request FSUB Channels |
 | `LOG_CHANNEL` | Log Channel |
+| `PING_URL` | Service URL for Keep-alive 
 
 
 ### 📚 Setup Guides
