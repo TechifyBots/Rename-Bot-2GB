@@ -26,10 +26,10 @@ async def help_cmd(client, message):
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🎬 𝖶𝖺𝗍𝖼𝗁 𝖳𝗎𝗍𝗈𝗋𝗂𝖺𝗅", url="https://youtu.be/6BWLUL3Faxs")]])
     )
     await asyncio.sleep(300)
-    await msg.delete()
     try:
+        await msg.delete()
         await message.delete()
-    except:
+    except Exception:
         pass
 
 @Client.on_message(filters.private & filters.command('setcaption'))
