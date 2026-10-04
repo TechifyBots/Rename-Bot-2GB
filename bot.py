@@ -1,4 +1,6 @@
 import os
+import asyncio
+import aiohttp
 import pyrogram.utils
 import pyromod
 from datetime import datetime
@@ -18,6 +20,19 @@ async def web_server():
     web_app = web.Application(client_max_size=30000000)
     web_app.add_routes(routes)
     return web_app
+
+async def keep_alive():
+    if not Config.PING_URL:
+        return
+    timeout = aiohttp.ClientTimeout(total=15)
+    async with aiohttp.ClientSession(timeout=timeout) as session:
+        while True:
+            try:
+                async with session.get(Config.PING_URL) as resp:
+                    print(f"Keep-alive: {resp.status}")
+            except Exception as e:
+                print(f"Keep-alive error: {e}")
+            await asyncio.sleep(300)
 
 pyrogram.utils.MIN_CHANNEL_ID = -100999999999999
 
@@ -45,6 +60,9 @@ class Bot(Client):
             await app.setup()
             PORT = int(os.environ.get("PORT", 8000))
             await web.TCPSite(app, "0.0.0.0", PORT).start()
+            print("Web server started.")
+            if Config.PING_URL:
+                asyncio.create_task(keep_alive())
         print(f"{me.first_name} Is Started.....✨️")
         if Config.ADMIN:
             try:
