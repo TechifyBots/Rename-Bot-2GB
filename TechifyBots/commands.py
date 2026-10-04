@@ -20,6 +20,18 @@ async def start(client, message):
         reply_markup=button
     )
 
+@Client.on_message(filters.private & filters.command("help"))
+async def help_cmd(client, message):
+    msg = await message.reply(Txt.GUIDE_TXT,
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🎬 𝖶𝖺𝗍𝖼𝗁 𝖳𝗎𝗍𝗈𝗋𝗂𝖺𝗅", url="https://youtu.be/6BWLUL3Faxs")]])
+    )
+    await asyncio.sleep(300)
+    await msg.delete()
+    try:
+        await message.delete()
+    except:
+        pass
+
 @Client.on_message(filters.private & filters.command('setcaption'))
 async def add_caption(client,message):
     if len(message.command)==1:
