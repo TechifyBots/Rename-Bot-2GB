@@ -18,6 +18,7 @@ class Config(object):
     BIN_CHANNEL = int(os.environ.get("BIN_CHANNEL", ""))     
     WEBHOOK = bool(os.environ.get("WEBHOOK", True))
     BOT_UPTIME = time.time()
+    PING_URL = os.environ.get("PING_URL", "") # Service URL for Keep-Alive
 
 
 class Txt(object):
