@@ -126,6 +126,7 @@ Watch this short video to understand **what the bot is**, **why it's useful**, *
 ```
 start - Check Bot Alive.
 ping - To check bot ping.
+help - Bot usage guide.
 viewthumb - To view current thumbnail.
 delthumb - To delete current thumbnail.
 setcaption - set a custom caption.
