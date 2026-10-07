@@ -121,7 +121,7 @@ Watch this short video to understand **what the bot is**, **why it's useful**, *
 
 ## 🤖 Commands
 
-####👤 User Commands
+#### 👤 User Commands
 
 ```
 start - Check Bot Alive.
