@@ -157,10 +157,7 @@ broadcast - Broadcast messages to all bot users.
 ```
 </details>
 
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/TechifyBots/TechifyBots/main/assets/divider.svg" width="600" alt="divider"/>
-</p>
+---
 
 ## 🚀 Deployment
 
@@ -243,4 +240,8 @@ This repository is based on the original work of:
 <a href="https://techifybots.github.io/PayWeb">
   <img src="https://img.shields.io/badge/💖-Support_Development-ff4d6d?style=for-the-badge">
 </a>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/TechifyBots/TechifyBots/main/assets/footer.svg" width="600" alt="footer"/>
 </p>
