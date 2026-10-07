@@ -121,8 +121,7 @@ Watch this short video to understand **what the bot is**, **why it's useful**, *
 
 ## 🤖 Commands
 
-<details>
-<summary><b>👤 User Commands</b></summary>
+####👤 User Commands
 
 ```
 start - Check Bot Alive.
@@ -140,8 +139,6 @@ setsuffix - Set Your Suffix
 seesuffix - See Your Suffix
 delsuffix - Delete Your Suffix
 ```
-
-</details>
 
 <details>
 <summary><b>🔒 Owner Commands</b></summary>
@@ -240,8 +237,4 @@ This repository is based on the original work of:
 <a href="https://techifybots.github.io/PayWeb">
   <img src="https://img.shields.io/badge/💖-Support_Development-ff4d6d?style=for-the-badge">
 </a>
-</p>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/TechifyBots/TechifyBots/main/assets/footer.svg" width="600" alt="footer"/>
 </p>
