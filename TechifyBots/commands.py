@@ -1,7 +1,7 @@
 import random
 import asyncio
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, InputMediaPhoto
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, InputMediaPhoto, WebAppInfo
 from .database import tb
 from config import Config, Txt  
 
@@ -248,7 +248,7 @@ async def cb_handler(client, query: CallbackQuery):
                 caption=Txt.DONATE_TXT
             ),
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🤖 𝖬𝗈𝗋𝖾 𝖡𝗈𝗍𝗌", url="https://telegram.me/TechifyBots/8")],
+                [InlineKeyboardButton('💳 𝖲𝗎𝗉𝗉𝗈𝗋𝗍 𝖳𝗁𝖾 𝖣𝖾𝗏𝖾𝗅𝗈𝗉𝖾𝗋', web_app=WebAppInfo(url='https://techifybots.vercel.app/pay'))],
                 [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="about"),
                  InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close")]
             ])
