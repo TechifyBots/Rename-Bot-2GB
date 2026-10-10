@@ -1,7 +1,10 @@
-import math, time, re, os
-from datetime import datetime
-from pytz import timezone
-from config import Config, Txt 
+import math
+import time
+import re
+import os
+import shutil
+from pyrogram import enums
+from config import Config, Txt
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 async def progress_for_pyrogram(current, total, ud_type, message, start):
@@ -29,7 +32,9 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
         try:
             await message.edit(
                 text=f"{ud_type}\n\n{tmp}",               
-                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✖️ Cancel ✖️", callback_data="close")]])                                               
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("✖️ Cancel ✖️", callback_data="close", style=enums.ButtonStyle.DANGER)]
+                ])
             )
         except:
             pass
