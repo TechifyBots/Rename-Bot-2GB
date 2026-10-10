@@ -31,13 +31,13 @@ class Txt(object):
 
     ABOUT_TXT = """<blockquote>🤖 𝗕𝗼𝘁 𝗜𝗻𝗳𝗼𝗿𝗺𝗮𝘁𝗶𝗼𝗻</blockquote>
 
-‣ 𝖬𝗒 𝖭𝖺𝗆𝖾 : <a href='https://youtube.com/@techifybots'>𝖳𝖾𝖼𝗁𝗂𝖿𝗒 𝖡𝗈𝗍𝗌</a>
+<b>‣ 𝖬𝗒 𝖭𝖺𝗆𝖾 :</b> <a href='https://youtube.com/@techifybots'>𝖳𝖾𝖼𝗁𝗂𝖿𝗒 𝖡𝗈𝗍𝗌</a>
 <b>‣ 𝖵𝖾𝗋𝗌𝗂𝗈𝗇 :</b> v{}
-‣ 𝖫𝗂𝖻𝗋𝖺𝗋𝗒 : <a href='https://docs.pyrogram.org/'>𝖯𝗒𝗋𝗈𝗀𝗋𝖺𝗆</a>
-‣ 𝖣𝖺𝗍𝖺𝖻𝖺𝗌𝖾 : <a href='https://www.mongodb.com/'>𝖬𝗈𝗇𝗀𝗈𝖣𝖡</a>
-‣ 𝖫𝖺𝗇𝗀𝗎𝖺𝗀𝖾 : <a href='https://www.python.org/download/releases/3.0/'>𝖯𝗒𝗍𝗁𝗈𝗇 𝟹</a>
-‣ 𝖡𝗈𝗍 𝖲𝖾𝗋𝗏𝖾𝗋 : <a href='https://www.koyeb.com/'>𝖪𝗈𝗒𝖾𝖻</a>
-‣ 𝖢𝗋𝖾𝖺𝗍𝖾𝖽 𝖡𝗒 : <a href='https://telegram.me/callownerbot'>𝖱𝖺𝗁𝗎𝗅</a>"""
+<b>‣ 𝖫𝗂𝖻𝗋𝖺𝗋𝗒 :</b> <a href='https://docs.pyrogram.org/'>𝖯𝗒𝗋𝗈𝗀𝗋𝖺𝗆</a>
+<b>‣ 𝖣𝖺𝗍𝖺𝖻𝖺𝗌𝖾 :</b> <a href='https://www.mongodb.com/'>𝖬𝗈𝗇𝗀𝗈𝖣𝖡</a>
+<b>‣ 𝖫𝖺𝗇𝗀𝗎𝖺𝗀𝖾 :</b> <a href='https://www.python.org/download/releases/3.0/'>𝖯𝗒𝗍𝗁𝗈𝗇 𝟹</a>
+<b>‣ 𝖡𝗈𝗍 𝖲𝖾𝗋𝗏𝖾𝗋 :</b> <a href='https://www.koyeb.com/'>𝖪𝗈𝗒𝖾𝖻</a>
+<b>‣ 𝖢𝗋𝖾𝖺𝗍𝖾𝖽 𝖡𝗒 :</b> <a href='https://telegram.me/callownerbot'>𝖱𝖺𝗁𝗎𝗅</a>"""
 
     GUIDE_TXT = """<blockquote>❓ 𝗛𝗮𝘃𝗶𝗻𝗴 𝗧𝗿𝗼𝘂𝗯𝗹𝗲?</blockquote>
 
