@@ -1,4 +1,4 @@
-from pyrogram import Client,filters
+from pyrogram import Client,filters,enums
 from pyrogram.enums import MessageMediaType
 from pyrogram.errors import FloodWait
 from pyrogram.types import InlineKeyboardButton,InlineKeyboardMarkup,ForceReply
@@ -52,9 +52,9 @@ async def refunc(client,message):
                 extn="mkv"
             new_name=new_name+"."+extn
         await reply_message.delete()
-        button=[[InlineKeyboardButton("📁 Document",callback_data="upload_document")]]
+        button=[[InlineKeyboardButton("📁 Document",callback_data="upload_document",style=enums.ButtonStyle.PRIMARY)]]
         if file.media in [MessageMediaType.VIDEO,MessageMediaType.DOCUMENT]:
-            button.append([InlineKeyboardButton("🎥 Video",callback_data="upload_video")])
+            button.append([InlineKeyboardButton("🎥 Video",callback_data="upload_video",style=enums.ButtonStyle.PRIMARY)])
         await message.reply(text=f"**Select The Output File Type**\n\n**File Name :-** `{new_name}`",reply_to_message_id=file.id,reply_markup=InlineKeyboardMarkup(button))
 
 @Client.on_callback_query(filters.regex("upload"))
@@ -127,7 +127,7 @@ async def doc(bot,update):
     except:
         pass
     type=update.data.split("_")[1]
-    close_button=InlineKeyboardMarkup([[InlineKeyboardButton("❌ Close",callback_data="close")]])
+    close_button=InlineKeyboardMarkup([[InlineKeyboardButton("❌ Close",callback_data="close",style=enums.ButtonStyle.DANGER)]])
     try:
         if type=="document":
             sent_message=await bot.send_document(update.message.chat.id,document=metadata_path if _bool_metadata else file_path,thumb=ph_path,caption=caption,progress=progress_for_pyrogram,progress_args=("💠 Uploading...  ⚡",ms,time.time()),reply_markup=close_button)
