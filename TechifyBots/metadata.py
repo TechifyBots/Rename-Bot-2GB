@@ -3,7 +3,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, CallbackQuery, LinkPreviewOptions, InlineKeyboardButton, InlineKeyboardMarkup
 from .database import tb
 from config import Txt
-import kurikit  # ✅ Must import before using client.listen()
+import kurikit
 
 ON = [
     [InlineKeyboardButton('Metadata On ✅', callback_data='metadata_1')],
@@ -50,6 +50,7 @@ async def query_metadata(bot: Client, query: CallbackQuery):
                 f"**Your Current Metadata :-**\n\n➜ `{user_metadata}` ",
                 reply_markup=InlineKeyboardMarkup(ON)
             )
+
     elif data == 'custom_metadata':
         await query.message.delete()
         try:
