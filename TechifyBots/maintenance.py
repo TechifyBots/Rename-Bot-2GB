@@ -1,4 +1,4 @@
-from pyrogram import Client, filters, StopPropagation
+from pyrogram import Client, filters, StopPropagation, enums
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from motor.motor_asyncio import AsyncIOMotorClient
 from config import Config
@@ -54,7 +54,7 @@ async def maintenance_blocker(client:Client,m:Message):
                 "ᴄᴏɴᴛᴀᴄᴛ ᴏᴡɴᴇʀ ꜰᴏʀ ᴍᴏʀᴇ ɪɴꜰᴏ."
             ),
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("👨‍💻 ᴏᴡɴᴇʀ 👨‍💻",user_id=int(Config.ADMIN))]]
+                [[InlineKeyboardButton("👨‍💻 ᴏᴡɴᴇʀ 👨‍💻",user_id=int(Config.ADMIN), style=enums.ButtonStyle.PRIMARY)]]
             )
         )
     except:
