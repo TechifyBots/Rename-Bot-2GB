@@ -5,7 +5,7 @@ import asyncio
 import logging
 import datetime
 from config import Config
-from pyrogram import Client, filters
+from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from pyrogram.errors import FloodWait, InputUserDeactivated, UserIsBlocked, PeerIdInvalid
 from .database import tb
@@ -104,7 +104,12 @@ async def do_ban(bot,message):
     text=await message.reply("<b>ʟᴇᴛ ᴍᴇ ᴄʜᴇᴄᴋ 👀</b>")
     banSts=await tb.ban_user(userid)
     if banSts==True:
-        await text.edit(text=f"<b><code>{userid}</code> ʜᴀs ʙᴇᴇɴ ʙᴀɴɴᴇᴅ</b>",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("ʏᴇs ✅",callback_data=f"sendAlert_{userid}_{reason if reason else 'no reason provided'}"),InlineKeyboardButton("ɴᴏ ❌",callback_data=f"noAlert_{userid}")]]))
+        await text.edit(text=f"<b><code>{userid}</code> ʜᴀs ʙᴇᴇɴ ʙᴀɴɴᴇᴅ</b>",
+                        reply_markup=InlineKeyboardMarkup([
+                            [InlineKeyboardButton("ʏᴇs ✅",callback_data=f"sendAlert_{userid}_{reason if reason else 'no reason provided'}", style=enums.ButtonStyle.PRIMARY),
+                             InlineKeyboardButton("ɴᴏ ❌",callback_data=f"noAlert_{userid}", style=enums.ButtonStyle.DANGER)]
+                        ])
+                       )
     else:
         await text.edit(f"<b><code>{userid}</code> ɪs ᴀʟʀᴇᴀᴅʏ ʙᴀɴɴᴇᴅ</b>")
 
@@ -116,7 +121,12 @@ async def do_unban(bot,message):
     text=await message.reply("<b>ʟᴇᴛ ᴍᴇ ᴄʜᴇᴄᴋ 🥱</b>")
     unban_chk=await tb.is_unbanned(userid)
     if unban_chk==True:
-        await text.edit(text=f'<b><code>{userid}</code> ɪs ᴜɴʙᴀɴɴᴇᴅ</b>',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("ʏᴇs ✅",callback_data=f"sendUnbanAlert_{userid}"),InlineKeyboardButton("ɴᴏ ❌",callback_data=f"NoUnbanAlert_{userid}")]]))
+        await text.edit(text=f'<b><code>{userid}</code> ɪs ᴜɴʙᴀɴɴᴇᴅ</b>',
+                        reply_markup=InlineKeyboardMarkup([
+                            [InlineKeyboardButton("ʏᴇs ✅",callback_data=f"sendUnbanAlert_{userid}", style=enums.ButtonStyle.PRIMARY),
+                             InlineKeyboardButton("ɴᴏ ❌",callback_data=f"NoUnbanAlert_{userid}", style=enums.ButtonStyle.DANGER)]
+                        ])
+                       )
     elif unban_chk==False:
         await text.edit('<b>ᴜsᴇʀ ɪs ɴᴏᴛ ʙᴀɴɴᴇᴅ ʏᴇᴛ.</b>')
     else:
