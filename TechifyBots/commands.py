@@ -1,6 +1,6 @@
 import random
 import asyncio
-from pyrogram import Client, filters
+from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, InputMediaPhoto, WebAppInfo
 from .database import tb
 from config import Config, Txt  
@@ -12,7 +12,7 @@ async def start(client, message):
     button = InlineKeyboardMarkup([
         [InlineKeyboardButton('ℹ️ 𝖠𝖻𝗈𝗎𝗍', callback_data='about'),
          InlineKeyboardButton('📚 𝖧𝖾𝗅𝗉', callback_data='help')],
-        [InlineKeyboardButton('👨‍💻 𝖣𝖾𝗏𝖾𝗅𝗈𝗉𝖾𝗋', user_id=int(Config.ADMIN))]
+        [InlineKeyboardButton('👨‍💻 𝖣𝖾𝗏𝖾𝗅𝗈𝗉𝖾𝗋', user_id=int(Config.ADMIN), style=enums.ButtonStyle.PRIMARY)]
     ])
     await message.reply_photo(
         photo=random.choice(Config.PICS),
@@ -23,7 +23,7 @@ async def start(client, message):
 @Client.on_message(filters.private & filters.command("help"))
 async def help_cmd(client, message):
     msg = await message.reply(Txt.GUIDE_TXT,
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🎬 𝖶𝖺𝗍𝖼𝗁 𝖳𝗎𝗍𝗈𝗋𝗂𝖺𝗅", url="https://youtu.be/6BWLUL3Faxs")]])
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🎬 𝖶𝖺𝗍𝖼𝗁 𝖳𝗎𝗍𝗈𝗋𝗂𝖺𝗅", url="https://youtu.be/6BWLUL3Faxs", style=enums.ButtonStyle.PRIMARY)]])
     )
     await asyncio.sleep(300)
     try:
@@ -138,7 +138,6 @@ async def see_suffix(client,message):
 @Client.on_callback_query()
 async def cb_handler(client, query: CallbackQuery):
     data = query.data 
-
     if data == "start":
         await query.message.edit_media(
             media=InputMediaPhoto(
@@ -148,7 +147,7 @@ async def cb_handler(client, query: CallbackQuery):
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('ℹ️ 𝖠𝖻𝗈𝗎𝗍', callback_data='about'),
                  InlineKeyboardButton('📚 𝖧𝖾𝗅𝗉', callback_data='help')],
-                [InlineKeyboardButton('👨‍💻 𝖣𝖾𝗏𝖾𝗅𝗈𝗉𝖾𝗋', user_id=int(Config.ADMIN))]
+                [InlineKeyboardButton('👨‍💻 𝖣𝖾𝗏𝖾𝗅𝗈𝗉𝖾𝗋', user_id=int(Config.ADMIN), style=enums.ButtonStyle.PRIMARY)]
             ])
         )
 
@@ -164,7 +163,7 @@ async def cb_handler(client, query: CallbackQuery):
                  InlineKeyboardButton("🔤 𝖲𝗎𝖿𝖿𝗂𝗑", callback_data="suffix")],
                 [InlineKeyboardButton("📝 𝖢𝖺𝗉𝗍𝗂𝗈𝗇", callback_data="caption"),
                  InlineKeyboardButton("🖼️ 𝖳𝗁𝗎𝗆𝖻𝗇𝖺𝗂𝗅", callback_data="thumbnail")],
-                [InlineKeyboardButton("🏠 𝖧𝗈𝗆𝖾", callback_data="start")]
+                [InlineKeyboardButton("🏠 𝖧𝗈𝗆𝖾", callback_data="start", style=enums.ButtonStyle.PRIMARY)]
             ])
         )
 
@@ -175,8 +174,8 @@ async def cb_handler(client, query: CallbackQuery):
                 caption=Txt.SEND_METADATA
             ),
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="help"),
-                 InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close")]
+                [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="help", style=enums.ButtonStyle.PRIMARY),
+                 InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close", style=enums.ButtonStyle.DANGER)]
             ])
         )
 
@@ -187,8 +186,8 @@ async def cb_handler(client, query: CallbackQuery):
                 caption=Txt.PREFIX
             ),
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="help"),
-                 InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close")]
+                [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="help", style=enums.ButtonStyle.PRIMARY),
+                 InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close", style=enums.ButtonStyle.DANGER)]
             ])
         )
 
@@ -199,8 +198,8 @@ async def cb_handler(client, query: CallbackQuery):
                 caption=Txt.SUFFIX
             ),
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="help"),
-                 InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close")]
+                [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="help", style=enums.ButtonStyle.PRIMARY),
+                 InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close", style=enums.ButtonStyle.DANGER)]
             ])
         )
 
@@ -211,8 +210,8 @@ async def cb_handler(client, query: CallbackQuery):
                 caption=Txt.CAPTION_TXT
             ),
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="help"),
-                 InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close")]
+                [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="help", style=enums.ButtonStyle.PRIMARY),
+                 InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close", style=enums.ButtonStyle.DANGER)]
             ])
         )
 
@@ -223,8 +222,8 @@ async def cb_handler(client, query: CallbackQuery):
                 caption=Txt.THUMBNAIL_TXT
             ),
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="help"),
-                 InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close")]
+                [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="help", style=enums.ButtonStyle.PRIMARY),
+                 InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close", style=enums.ButtonStyle.DANGER)]
             ])
         )
 
@@ -237,7 +236,7 @@ async def cb_handler(client, query: CallbackQuery):
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("💻 𝖱𝖾𝗉𝗈", url="https://github.com/TechifyBots/Rename-Bot-2GB"),
                  InlineKeyboardButton("💖 𝖣𝗈𝗇𝖺𝗍𝖾", callback_data="donate")],
-                [InlineKeyboardButton("🏠 𝖧𝗈𝗆𝖾", callback_data="start")]
+                [InlineKeyboardButton("🏠 𝖧𝗈𝗆𝖾", callback_data="start", style=enums.ButtonStyle.PRIMARY)]
             ])
         )
 
@@ -249,8 +248,8 @@ async def cb_handler(client, query: CallbackQuery):
             ),
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('💳 𝖲𝗎𝗉𝗉𝗈𝗋𝗍 𝖳𝗁𝖾 𝖣𝖾𝗏𝖾𝗅𝗈𝗉𝖾𝗋', web_app=WebAppInfo(url='https://techifybots.vercel.app/pay'))],
-                [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="about"),
-                 InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close")]
+                [InlineKeyboardButton("🔙 𝖡𝖺𝖼𝗄", callback_data="about", style=enums.ButtonStyle.PRIMARY),
+                 InlineKeyboardButton("❌ 𝖢𝗅𝗈𝗌𝖾", callback_data="close", style=enums.ButtonStyle.DANGER)]
             ])
         )
 
