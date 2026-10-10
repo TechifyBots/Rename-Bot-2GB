@@ -2,7 +2,6 @@ import os
 import asyncio
 import aiohttp
 import pyrogram.utils
-import pyromod
 from datetime import datetime
 from pytz import timezone
 from pyrogram import Client, __version__
