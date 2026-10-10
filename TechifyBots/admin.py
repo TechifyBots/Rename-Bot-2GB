@@ -69,7 +69,7 @@ async def send_msg(user_id,message):
         return 200
     except FloodWait as e:
         await asyncio.sleep(e.value)
-        return send_msg(user_id,message)
+        return await send_msg(user_id,message)
     except InputUserDeactivated:
         logger.info(f"{user_id} : Deactivated")
         return 400
