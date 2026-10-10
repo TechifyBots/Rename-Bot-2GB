@@ -19,6 +19,7 @@ class Config(object):
     WEBHOOK = bool(os.environ.get("WEBHOOK", True))
     BOT_UPTIME = time.time()
     PING_URL = os.environ.get("PING_URL", "") # Service URL for Keep-Alive
+    VERSION = os.environ.get("VERSION", "3.0")
 
 
 class Txt(object):
@@ -28,14 +29,17 @@ class Txt(object):
 
 <blockquote><b>𝘕𝘰𝘵𝘦 :</b> 𝘈𝘥𝘶𝘭𝘵 𝘊𝘰𝘯𝘵𝘦𝘯𝘵 𝘪𝘴 𝘚𝘛𝘙𝘐𝘊𝘛𝘓𝘠 𝘱𝘳𝘰𝘩𝘪𝘣𝘪𝘵𝘦𝘥 𝘉𝘢𝘯 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘱𝘦𝘳𝘮𝘢𝘯𝘦𝘯𝘵.</blockquote>"""
 
-    ABOUT_TXT = """‣ 𝖬𝗒 𝖭𝖺𝗆𝖾 : <a href='https://youtube.com/@techifybots'>𝖹𝗈𝗋𝗈 𝖱𝖾𝗇𝖺𝗆𝖾 𝖡𝗈𝗍</a>
+    ABOUT_TXT = """<blockquote>🤖 𝗕𝗼𝘁 𝗜𝗻𝗳𝗼𝗿𝗺𝗮𝘁𝗶𝗼𝗻</blockquote>
+
+‣ 𝖬𝗒 𝖭𝖺𝗆𝖾 : <a href='https://youtube.com/@techifybots'>𝖳𝖾𝖼𝗁𝗂𝖿𝗒 𝖡𝗈𝗍𝗌</a>
+<b>‣ 𝖵𝖾𝗋𝗌𝗂𝗈𝗇 :</b> v{}
 ‣ 𝖫𝗂𝖻𝗋𝖺𝗋𝗒 : <a href='https://docs.pyrogram.org/'>𝖯𝗒𝗋𝗈𝗀𝗋𝖺𝗆</a>
 ‣ 𝖣𝖺𝗍𝖺𝖻𝖺𝗌𝖾 : <a href='https://www.mongodb.com/'>𝖬𝗈𝗇𝗀𝗈𝖣𝖡</a>
 ‣ 𝖫𝖺𝗇𝗀𝗎𝖺𝗀𝖾 : <a href='https://www.python.org/download/releases/3.0/'>𝖯𝗒𝗍𝗁𝗈𝗇 𝟹</a>
 ‣ 𝖡𝗈𝗍 𝖲𝖾𝗋𝗏𝖾𝗋 : <a href='https://www.koyeb.com/'>𝖪𝗈𝗒𝖾𝖻</a>
 ‣ 𝖢𝗋𝖾𝖺𝗍𝖾𝖽 𝖡𝗒 : <a href='https://telegram.me/callownerbot'>𝖱𝖺𝗁𝗎𝗅</a>"""
 
-    GUIDE_TXT = """❓ 𝗛𝗮𝘃𝗶𝗻𝗴 𝗧𝗿𝗼𝘂𝗯𝗹𝗲?
+    GUIDE_TXT = """<blockquote>❓ 𝗛𝗮𝘃𝗶𝗻𝗴 𝗧𝗿𝗼𝘂𝗯𝗹𝗲?</blockquote>
 
 𝖨𝖿 𝗒𝗈𝗎'𝗋𝖾 𝖿𝖺𝖼𝗂𝗇𝗀 𝖺𝗇𝗒 𝗉𝗋𝗈𝖻𝗅𝖾𝗆 𝗐𝗁𝗂𝗅𝖾 𝗎𝗌𝗂𝗇𝗀 𝗍𝗁𝖾 𝖻𝗈𝗍 𝗈𝗋 𝗂𝗍𝗌 𝖼𝗈𝗆𝗆𝖺𝗇𝖽𝗌, 𝗉𝗅𝖾𝖺𝗌𝖾 𝗐𝖺𝗍𝖼𝗁 𝗍𝗁𝖾 𝗍𝗎𝗍𝗈𝗋𝗂𝖺𝗅 𝗏𝗂𝖽𝖾𝗈 𝖻𝖾𝗅𝗈𝗐.
 
@@ -91,13 +95,13 @@ class Txt(object):
 <b>⏰️ 𝖤𝖳𝖠 :</b> {4}
 """
 
-    DONATE_TXT = """☕ 𝗦𝘂𝗽𝗽𝗼𝗿𝘁 𝗧𝗵𝗲 𝗗𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿
+    DONATE_TXT = """<blockquote>☕ 𝗦𝘂𝗽𝗽𝗼𝗿𝘁 𝗧𝗵𝗲 𝗗𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿</blockquote>
 
 𝖪𝖾𝖾𝗉𝗂𝗇𝗀 𝗍𝗁𝗂𝗌 𝖻𝗈𝗍 𝖿𝖺𝗌𝗍 𝖺𝗇𝖽 𝗈𝗇𝗅𝗂𝗇𝖾 𝟤𝟦/𝟩 𝗋𝖾𝗊𝗎𝗂𝗋𝖾𝗌 𝗌𝖾𝗋𝗏𝖾𝗋 𝗋𝖾𝗌𝗈𝗎𝗋𝖼𝖾𝗌. 𝖨𝖿 𝗒𝗈𝗎 𝖾𝗇𝗃𝗈𝗒 𝗎𝗌𝗂𝗇𝗀 𝗍𝗁𝗂𝗌 𝖻𝗈𝗍, 𝖼𝗈𝗇𝗌𝗂𝖽𝖾𝗋 𝖿𝗎𝖾𝗅𝗂𝗇𝗀 𝗂𝗍𝗌 𝖽𝖾𝗏𝖾𝗅𝗈𝗉𝗆𝖾𝗇𝗍! ✨
 
 💳 <b>𝖴𝖯𝖨 𝖨𝖣:</b> <code>RahulDhankhar@UPI</code>
 
-<blockquote><b><i>𝖤𝗏𝖾𝗋𝗒 𝖼𝗈𝗇𝗍𝗋𝗂𝖻𝗎𝗍𝗂𝗈𝗇 𝗄𝖾𝖾𝗉𝗌 𝗍𝗁𝖾 𝗌𝖾𝗋𝗏𝖾𝗋𝗌 𝗁𝗎𝗆𝗆𝗂𝗇𝗀. 𝖳𝗁𝖺𝗇𝗄 𝗒𝗈𝗎! 💖</i></b></blockquote>"""
+<blockquote><i>𝖤𝗏𝖾𝗋𝗒 𝖼𝗈𝗇𝗍𝗋𝗂𝖻𝗎𝗍𝗂𝗈𝗇 𝗄𝖾𝖾𝗉𝗌 𝗍𝗁𝖾 𝗌𝖾𝗋𝗏𝖾𝗋𝗌 𝗁𝗎𝗆𝗆𝗂𝗇𝗀. 𝖳𝗁𝖺𝗇𝗄 𝗒𝗈𝗎! 💖</i></blockquote>"""
 
     SEND_METADATA = """<blockquote>📝 𝖳𝗈 𝖲𝖾𝗍 𝖢𝗎𝗌𝗍𝗈𝗆 𝖬𝖾𝗍𝖺𝖽𝖺𝗍𝖺</blockquote>
 
