@@ -1,8 +1,8 @@
-pyrofork==2.3.69
+kurigram
 tgcrypto
 motor
 hachoir
 pillow
 aiohttp
 pytz
-pyromod
+git+https://github.com/TechifyBots/Kurikit.git
