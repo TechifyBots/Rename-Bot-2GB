@@ -232,7 +232,7 @@ async def cb_handler(client, query: CallbackQuery):
         await query.message.edit_media(
             media=InputMediaPhoto(
                 random.choice(Config.PICS),
-                caption=Txt.ABOUT_TXT
+                caption=Txt.ABOUT_TXT.format(Config.VERSION)
             ),
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("💻 𝖱𝖾𝗉𝗈", url="https://github.com/TechifyBots/Rename-Bot-2GB"),
