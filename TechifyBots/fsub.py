@@ -14,11 +14,7 @@ class TechifyBots:
         self.fsub_cache = db["fsub_cache"]
 
     async def add_join_req(self, user_id: int, channel_id: int):
-        await self.join_requests.update_one(
-            {"user_id": user_id},
-            {"$addToSet": {"channels": channel_id}, "$set": {"created_at": datetime.datetime.utcnow()}},
-            upsert=True
-        )
+        await self.join_requests.update_one({"user_id": user_id}, {"$addToSet": {"channels": channel_id}, "$set": {"created_at": datetime.datetime.utcnow()}}, upsert=True)
 
     async def has_joined_channel(self, user_id: int, channel_id: int) -> bool:
         doc = await self.join_requests.find_one({"user_id": user_id})
@@ -29,11 +25,7 @@ class TechifyBots:
         await self.fsub_cache.drop()
 
     async def save_fsub_msg(self, user_id: int, message_id: int):
-        await self.fsub_cache.update_one(
-            {"user_id": user_id},
-            {"$set": {"message_id": message_id, "created_at": datetime.datetime.utcnow()}},
-            upsert=True
-        )
+        await self.fsub_cache.update_one({"user_id": user_id}, {"$set": {"message_id": message_id, "created_at": datetime.datetime.utcnow()}}, upsert=True)
 
     async def get_fsub_msg(self, user_id: int):
         doc = await self.fsub_cache.find_one({"user_id": user_id})
@@ -70,13 +62,7 @@ async def auto_delete_fsub_and_start(client: Client, user_id: int):
     user = await client.get_users(user_id)
     bot_user = await client.get_me()
     try:
-        await client.send_message(
-            user_id,
-            f"**{user.mention},\n\nʏᴏᴜ ʜᴀᴠᴇ ᴊᴏɪɴᴇᴅ ᴀʟʟ ʀᴇǫᴜɪʀᴇᴅ ᴄʜᴀɴɴᴇʟs.\n\nᴄʟɪᴄᴋ ᴛʜᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ᴄᴏɴᴛɪɴᴜᴇ**",
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("▶️ 𝖲𝗍𝖺𝗋𝗍", url=f"https://telegram.me/{bot_user.username}?start=start")]]
-            )
-        )
+        await client.send_message(user_id, f"**{user.mention},\n\nʏᴏᴜ ʜᴀᴠᴇ ᴊᴏɪɴᴇᴅ ᴀʟʟ ʀᴇǫᴜɪʀᴇᴅ ᴄʜᴀɴɴᴇʟs.\n\nᴄʟɪᴄᴋ ᴛʜᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ᴄᴏɴᴛɪɴᴜᴇ**", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("▶️ 𝖲𝗍𝖺𝗋𝗍", url=f"https://telegram.me/{bot_user.username}?start=start", style=enums.ButtonStyle.PRIMARY)]]))
     except Exception as e:
         logging.error(f"Failed to send start link to {user_id}: {e}")
 
@@ -90,11 +76,7 @@ async def join_reqs(client: Client, message: ChatJoinRequest):
 
 @Client.on_chat_member_updated(filters.chat(Config.AUTH_CHANNELS))
 async def check_normal_join(client: Client, message: ChatMemberUpdated):
-    if message.from_user and message.new_chat_member and message.new_chat_member.status in [
-        enums.ChatMemberStatus.MEMBER,
-        enums.ChatMemberStatus.ADMINISTRATOR,
-        enums.ChatMemberStatus.OWNER
-    ]:
+    if message.from_user and message.new_chat_member and message.new_chat_member.status in [enums.ChatMemberStatus.MEMBER, enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER]:
         await auto_delete_fsub_and_start(client, message.from_user.id)
 
 @Client.on_message(filters.command("delreq") & filters.private & filters.user(Config.ADMIN))
@@ -104,7 +86,7 @@ async def del_requests(client: Client, message: Message):
 
 async def is_subscribed(bot: Client, user_id: int):
     missing = []
-    expire_at = datetime.datetime.utcnow() + datetime.timedelta(minutes=Config.FSUB_EXPIRE) if Config.FSUB_EXPIRE > 0 else None
+    expire_at = datetime.datetime.utcnow() + datetime.timedelta(minutes=FSUB_EXPIRE) if FSUB_EXPIRE > 0 else None
     for channel_id in Config.AUTH_CHANNELS:
         try:
             await bot.get_chat_member(channel_id, user_id)
@@ -121,7 +103,6 @@ async def is_subscribed(bot: Client, user_id: int):
             pass
     return missing
 
-
 async def is_req_subscribed(bot: Client, user_id: int):
     missing = []
     for channel_id in Config.AUTH_REQ_CHANNELS:
@@ -135,39 +116,28 @@ async def is_req_subscribed(bot: Client, user_id: int):
             logging.error(f"Bot not admin in request channel {channel_id}")
         except Exception:
             pass
-
     return missing
-
 
 async def get_fsub(bot: Client, message: Message) -> bool:
     user_id = message.from_user.id
-
     if user_id == Config.ADMIN:
         return True
-
     old_msg_id = await tb.get_fsub_msg(user_id)
-
     if old_msg_id:
         try:
             await bot.delete_messages(user_id, old_msg_id)
         except Exception:
             pass
         await tb.delete_fsub_msg_db(user_id)
-
     missing = []
-
     if Config.AUTH_CHANNELS:
         missing.extend(await is_subscribed(bot, user_id))
-
     if Config.AUTH_REQ_CHANNELS:
         missing.extend(await is_req_subscribed(bot, user_id))
-
     if not missing:
         return True
-
     bot_user = await bot.get_me()
     buttons = []
-
     for i in range(0, len(missing), 2):
         row = []
         for j in range(2):
@@ -175,22 +145,12 @@ async def get_fsub(bot: Client, message: Message) -> bool:
                 title, link = missing[i + j]
                 row.append(InlineKeyboardButton(f"{i + j + 1}. {title}", url=link))
         buttons.append(row)
-
-    buttons.append(
-        [InlineKeyboardButton("🔄 𝖳𝗋𝗒 𝖠𝗀𝖺𝗂𝗇", url=f"https://telegram.me/{bot_user.username}?start=start")]
-    )
-    msg = await message.reply(
-        f"<blockquote>**🔒 𝖠𝖼𝖼𝖾𝗌𝗌 𝖱𝖾𝗌𝗍𝗋𝗂𝖼𝗍𝖾𝖽!**</blockquote>\n\n"
-        f"{message.from_user.mention}, 𝖳𝗈 𝖴𝗌𝖾 𝖳𝗁𝗂𝗌 𝖡𝗈𝗍, 𝖸𝗈𝗎 𝖭𝖾𝖾𝖽 𝖳𝗈 𝖩𝗈𝗂𝗇 𝖠𝖫𝖫 𝖱𝖾𝗊𝗎𝗂𝗋𝖾𝖽 𝖢𝗁𝖺𝗇𝗇𝖾𝗅𝗌.\n\n"
-        f"𝖱𝖾𝗊𝗎𝗂𝗋𝖾𝖽 𝖢𝗁𝖺𝗇𝗇𝖾𝗅𝗌 ({len(missing)})\n\n"
-        f"𝖠𝖿𝗍𝖾𝗋 𝖩𝗈𝗂𝗇𝗂𝗇𝗀, 𝖢𝗅𝗂𝖼𝗄 **“𝖳𝗋𝗒 𝖠𝗀𝖺𝗂𝗇”** 𝖡𝖾𝗅𝗈𝗐.",
-        reply_markup=InlineKeyboardMarkup(buttons)
-    )
+    buttons.append([InlineKeyboardButton("🔄 𝖳𝗋𝗒 𝖠𝗀𝖺𝗂𝗇", url=f"https://telegram.me/{bot_user.username}?start=start", style=enums.ButtonStyle.PRIMARY)])
+    msg = await message.reply(f"<blockquote>**🔒 𝖠𝖼𝖼𝖾𝗌𝗌 𝖱𝖾𝗌𝗍𝗋𝗂𝖼𝗍𝖾𝖽!**</blockquote>\n\n{message.from_user.mention}, 𝖳𝗈 𝖴𝗌𝖾 𝖳𝗁𝗂𝗌 𝖡𝗈𝗍, 𝖸𝗈𝗎 𝖭𝖾𝖾𝖽 𝖳𝗈 𝖩𝗈𝗂𝗇 𝖠𝖫𝖫 𝖱𝖾𝗊𝗎𝗂𝗋𝖾𝖽 𝖢𝗁𝖺𝗇𝗇𝖾𝗅𝗌.\n\n𝖱𝖾𝗊𝗎𝗂𝗋𝖾𝖽 𝖢𝗁𝖺𝗇𝗇𝖾𝗅𝗌 ({len(missing)})\n\n𝖠𝖿𝗍𝖾𝗋 𝖩𝗈𝗂𝗇𝗂𝗇𝗀, 𝖢𝗅𝗂𝖼𝗄 **“𝖳𝗋𝗒 𝖠𝗀𝖺𝗂𝗇”** 𝖡𝖾𝗅𝗈𝗐.", reply_markup=InlineKeyboardMarkup(buttons))
     await tb.save_fsub_msg(user_id, msg.id)
     return False
 
-
-@Client.on_message(filters.private & ~filters.user(Config.ADMIN) & ~filters.bot & ~filters.service & ~filters.me, group=-10)
+@Client.on_message(filters.private & ~filters.user(ADMIN) & ~filters.bot & ~filters.service & ~filters.me, group=-10)
 async def global_fsub_checker(client: Client, message: Message):
     if not Config.IS_FSUB:
         return
