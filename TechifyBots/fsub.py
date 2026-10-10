@@ -86,7 +86,7 @@ async def del_requests(client: Client, message: Message):
 
 async def is_subscribed(bot: Client, user_id: int):
     missing = []
-    expire_at = datetime.datetime.utcnow() + datetime.timedelta(minutes=FSUB_EXPIRE) if FSUB_EXPIRE > 0 else None
+    expire_at = datetime.datetime.utcnow() + datetime.timedelta(minutes=Config.FSUB_EXPIRE) if Config.FSUB_EXPIRE > 0 else None
     for channel_id in Config.AUTH_CHANNELS:
         try:
             await bot.get_chat_member(channel_id, user_id)
@@ -150,7 +150,7 @@ async def get_fsub(bot: Client, message: Message) -> bool:
     await tb.save_fsub_msg(user_id, msg.id)
     return False
 
-@Client.on_message(filters.private & ~filters.user(ADMIN) & ~filters.bot & ~filters.service & ~filters.me, group=-10)
+@Client.on_message(filters.private & ~filters.user(Config.ADMIN) & ~filters.bot & ~filters.service & ~filters.me, group=-10)
 async def global_fsub_checker(client: Client, message: Message):
     if not Config.IS_FSUB:
         return
